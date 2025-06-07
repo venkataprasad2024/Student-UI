@@ -9,7 +9,7 @@ import {
   AirVent,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import ComplaintButton from './ComplaintButton';
+import BarcodeSearch from './BarcodeSearch';
 import ComplaintModal from './ComplaintModal';
 import LoginModal from './LoginModal';
 import AuthContext from './context/AuthContext';
@@ -18,6 +18,8 @@ const Hero = () => {
   const [showComplaintModal, setShowComplaintModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const { isLoggedIn } = useContext(AuthContext);
+   const [selectedProduct, setSelectedProduct] = useState(null);
+
 
   const handleComplaintClick = () => {
     if (isLoggedIn) {
@@ -107,7 +109,8 @@ const Hero = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              <ComplaintButton onClick={handleComplaintClick} />
+                <BarcodeSearch setSelectedProduct={setSelectedProduct} />
+      {selectedProduct && <ProductCard product={selectedProduct} />}
             </motion.div>
           </div>
         </div>
